@@ -3,11 +3,28 @@
 ## Login to SDSC Expanse
 Go to [portal.expanse.sdsc.edu](https://portal.expanse.sdsc.edu/) and login with your "ucsd.edu" credentials, unless instructed otherwise, in which case, you may use your "access-ci.org" credentials (if you have one).
 
-**Note: If this is your first time logging in Follow the instructions below:**
-<br>
-Go through and select academic non profit, accept the terms, and if you get a permission denied error, just click logout. Once you have done so you, you will be asked to link your account. You should see a series of random characters and @ucsd.edu and below you will be given options to link your account. Please select the access-ci account, and you will be prompted to login to NSF ACCESS. 
-<br>
-<br>
+## First-Time Login Instructions
+
+If this is your first time logging in, please follow these steps:
+
+1. **Select Account Type**  
+   Choose the **Academic Non-Profit** option.
+
+2. **Accept Terms**  
+   Read and accept the terms and conditions.
+
+3. **Handling Permission Denied Error**  
+   If you encounter a "permission denied" error, simply click **Logout**.
+
+4. **Link Your Account**  
+   - You will be prompted to link your account.
+   - You should see a string of random characters followed by `@ucsd.edu`.
+   - Below this, you will see options to link your account.
+
+5. **Select Access-CI Account**  
+   - Choose the **access-ci** account option.
+   - You will then be prompted to log in to **NSF ACCESS**.
+
 
 ## Logging into SDSC
 ## Portal Navigation
