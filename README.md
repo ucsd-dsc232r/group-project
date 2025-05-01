@@ -25,6 +25,10 @@ If this is your first time logging in, please follow these steps:
    - Choose the **access-ci** account option.
    - You will then be prompted to log in to **NSF ACCESS**.
 
+## Troubleshooting
+If you still encounter errors after logging out, logging back in, and waiting 15 minutes, please submit a support ticket for further assistance [more info here](#support).
+
+
 
 ## Logging into SDSC
 ## Portal Navigation
