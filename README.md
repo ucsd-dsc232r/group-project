@@ -110,17 +110,40 @@ After clicking "Submit", the SDSC Expanse Portal will put your job request in a 
 <br>
 
 ### 2.2. Spark Session Builder
-Based on the configurations provided in **Jupyter** above, you need to update the following code to build your `SparkSession`. 
-> For example, if you have 128GB of total memory and 8 cores, each core gets 128/8 = 16GB of memory. The driver can take 1 or more cores and executors can take the remaining cores (7 or less).
+Based on the configurations provided in **Jupyter** above, you need to update the following code to build your `SparkSession`.
+
+**The Formula:**
+```
+Driver memory = 1-2GB (fixed, small - driver coordinates but doesn't process data)
+Executor instances = Total Cores - 1  (reserve 1 core for the driver)
+Executor memory = (Total Memory - Driver Memory) / Executor Instances
+```
+
+**Example:** 128GB of total memory and 8 cores:
+- Driver: **2GB** (fixed)
+- Executors: 8 - 1 = **7 instances**
+- Per executor: (128GB - 2GB) / 7 = **18GB each**
+
 ```py
-sc = SparkSession.builder \
-    .config("spark.driver.memory", "16g") \
-    .config("spark.executor.memory", "16g") \
+spark = SparkSession.builder \
+    .config("spark.driver.memory", "2g") \
+    .config("spark.executor.memory", "18g") \
     .config('spark.executor.instances', 7) \
     .getOrCreate()
 ```
 
->Driver memory is the memory required by the master node. This can be similar to the executor memory as long as you are not sending a lot of data to the driver (i.e., running collect() or other heavy shuffle operation).
+**Quick Reference Table:**
+
+| Cores | Total Memory | Driver | Executors | Executor Memory |
+|-------|--------------|--------|-----------|-----------------|
+| 8 | 16GB | 2GB | 7 | 2GB |
+| 8 | 128GB | 2GB | 7 | 18GB |
+| 16 | 32GB | 2GB | 15 | 2GB |
+| 16 | 128GB | 2GB | 15 | 8GB |
+
+> **Note:** The driver only coordinates—it doesn't process data. Keep it at 1-2GB to maximize memory for executors where the real work happens.
+
+For a comprehensive guide on memory configuration, common mistakes, and optimization strategies, see **[Spark HPC Best Practices](SPARK_HPC_BEST_PRACTICES.md)**.
 
 ![Spark Session](images/spark-session.png "Spark Session")
 

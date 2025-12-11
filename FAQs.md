@@ -55,19 +55,60 @@
 
 5. **Please provide an example SparkSession configuration.**
 
-    Let us assume you defined the following Jupyter Session:
-    - **Number of cores**: `8`
-    - **Memory required per node (GB)**: `128`
+    **The Formula:**
+    ```
+    Driver memory = 1-2GB (fixed, small)
+    Executor instances = Total Cores - 1  (reserve 1 for driver)
+    Executor memory = (Total Memory - Driver Memory) / Executor Instances
+    ```
 
-    This means you have 128GB of total memory and 8 cores. So, each core gets 128/8 = 16GB of memory. The driver can take 1 or more cores and executors can take the remaining cores (7 or less). So, we can define the SparkSession builder configuration as follows:
+    **Example:** 8 cores with 128GB memory:
+    - Driver: **2GB** (fixed)
+    - Executors: 8 - 1 = **7 instances**
+    - Per executor: (128GB - 2GB) / 7 = **18GB each**
+
     ```py
-    sc = SparkSession.builder \
-        .config("spark.driver.memory", "16g") \
-        .config("spark.executor.memory", "16g") \
+    spark = SparkSession.builder \
+        .config("spark.driver.memory", "2g") \
+        .config("spark.executor.memory", "18g") \
         .config('spark.executor.instances', 7) \
         .getOrCreate()
     ```
-    
+
+    For more examples and detailed explanations, see the **[Spark HPC Best Practices Guide](SPARK_HPC_BEST_PRACTICES.md)**.
+
+    <br>
+    <br>
+
+6. **Why should driver memory be small (1-2GB)?**
+
+    The driver coordinates the job but doesn't process data—executors do. The driver only:
+    - Builds the execution plan (DAG)—just metadata
+    - Schedules tasks—lightweight tracking
+    - Receives small results like `count()` or `mean()`
+
+    **1-2GB is sufficient** for most workloads. Giving the driver more memory wastes resources that could go to executors where the actual data processing happens.
+
+    **Exceptions (consider 4GB driver):**
+    - Interactive Jupyter analysis with frequent `toPandas()` for visualization
+    - Broadcasting lookup tables > 1GB
+    - ML training pipelines with large models
+    - Processing 10,000+ small files
+
+    See the **[Spark HPC Best Practices Guide](SPARK_HPC_BEST_PRACTICES.md)** for detailed caveats and trade-offs.
+
+    <br>
+    <br>
+
+7. **I'm getting out-of-memory errors. What should I do?**
+
+    1. **Increase memory per core:** Request more total memory in your Jupyter session
+    2. **Check your code:** Avoid `collect()` on large datasets
+    3. **Use Parquet:** Write intermediate results to Parquet instead of keeping in memory
+    4. **Repartition:** If data is skewed, use `repartition()` to balance partitions
+
+    See the **[Spark HPC Best Practices Guide](SPARK_HPC_BEST_PRACTICES.md)** for detailed troubleshooting.
+
     <br>
     <br>
 
