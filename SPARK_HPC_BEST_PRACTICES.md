@@ -21,12 +21,12 @@ You've seen how Python and Spark run on your laptop with limited resources. On a
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                     Your Allocation                      │
-│  ┌──────────┐   ┌──────────┐   ┌──────────┐            │
-│  │  Driver  │   │ Executor │   │ Executor │  ...       │
-│  │  (1 core)│   │  (1 core)│   │  (1 core)│            │
-│  │   1-2GB  │   │   18GB   │   │   18GB   │            │
-│  └──────────┘   └──────────┘   └──────────┘            │
+│                     Your Allocation                     │
+│  ┌──────────┐   ┌──────────┐   ┌──────────┐             │
+│  │  Driver  │   │ Executor │   │ Executor │  ...        │
+│  │  (1 core)│   │  (1 core)│   │  (1 core)│             │
+│  │   1-2GB  │   │   18GB   │   │   18GB   │             │
+│  └──────────┘   └──────────┘   └──────────┘             │
 │       ↑              ↑              ↑                   │
 │       └──────────────┴──────────────┘                   │
 │              Spark Cluster Manager                      │
