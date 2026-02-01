@@ -454,11 +454,145 @@ spark = SparkSession.builder \
 
 ---
 
+## Understanding Shuffle and Communication Costs
+
+### What is a Shuffle?
+
+A **shuffle** occurs when Spark redistributes data across executors. Shuffles are the most expensive operations in Spark because they involve:
+
+1. **Disk I/O**: Writing intermediate data to local disk
+2. **Network I/O**: Transferring data between executors
+3. **Serialization**: Converting objects to bytes and back
+
+### Operations That Cause Shuffles
+
+| Operation | Shuffles? | Alternative |
+|-----------|-----------|-------------|
+| `groupBy()` | Yes | Use `reduceByKey()` when possible |
+| `join()` on large tables | Yes | Use `broadcast()` for small tables |
+| `repartition(n)` | Yes | Use `coalesce(n)` to reduce partitions |
+| `distinct()` | Yes | Use `dropDuplicates(subset)` on key columns |
+| `orderBy()` | Yes | Avoid unless needed for output |
+
+### Minimizing Shuffle Costs
+
+**1. Use Broadcast Joins for Small Tables**
+
+```python
+from pyspark.sql.functions import broadcast
+
+# BAD: Both tables shuffle
+result = large_df.join(small_df, "key")
+
+# GOOD: Small table broadcast to all executors (no shuffle)
+result = large_df.join(broadcast(small_df), "key")
+```
+
+**2. Filter Early**
+
+```python
+# BAD: Shuffle all data, then filter
+result = df.groupBy("category").count().filter(col("count") > 100)
+
+# GOOD: Filter before shuffle (if possible)
+result = df.filter(col("value").isNotNull()).groupBy("category").count()
+```
+
+**3. Use Coalesce Instead of Repartition**
+
+```python
+# BAD: Full shuffle to reduce partitions
+df.repartition(10).write.parquet("output")
+
+# GOOD: No shuffle, just combine partitions locally
+df.coalesce(10).write.parquet("output")
+```
+
+### Identifying Shuffles in Spark UI
+
+In the Spark UI:
+- Each **stage boundary** represents a shuffle
+- Check **Shuffle Read/Write** in the Stages tab
+- Look for **Spill (Memory/Disk)** indicating memory pressure
+
+**Red Flags in Spark UI:**
+- Shuffle Spill > 0: Consider more memory per executor
+- One task much slower than others: Data skew
+- Shuffle Read >> Shuffle Write: Data explosion during shuffle
+
+### For Your Project
+
+In your README.md, document:
+1. Number of shuffles in your pipeline
+2. Shuffle data volume (from Spark UI)
+3. Any optimizations you made to reduce shuffles
+
+See the full [Communication Costs Guide](../Class16/07_communication_costs.md) for detailed examples.
+
+---
+
+## Measuring Speedup
+
+Understanding how well your code parallelizes is essential. Measure speedup to validate your distributed implementation.
+
+### Speedup Formula
+
+$$\text{Speedup} = \frac{T_1}{T_n}$$
+
+Where $T_1$ is time with 1 executor and $T_n$ is time with n executors.
+
+### Efficiency
+
+$$\text{Efficiency} = \frac{\text{Speedup}}{n}$$
+
+| Efficiency | Interpretation |
+|------------|----------------|
+| > 80% | Excellent parallelization |
+| 50-80% | Good, some overhead |
+| < 50% | Significant bottlenecks |
+
+### How to Measure
+
+```python
+import time
+
+# Baseline: 1 executor
+start = time.time()
+result = df.groupBy("key").count().collect()
+T_1 = time.time() - start
+
+# Parallel: n executors
+start = time.time()
+result = df.groupBy("key").count().collect()
+T_n = time.time() - start
+
+speedup = T_1 / T_n
+efficiency = speedup / n_executors
+print(f"Speedup: {speedup:.2f}x, Efficiency: {efficiency:.1%}")
+```
+
+### For Your Project (Milestone 3)
+
+Include a speedup analysis table:
+
+| Executors | Time (sec) | Speedup | Efficiency |
+|-----------|------------|---------|------------|
+| 1         | X          | 1.00x   | 100%       |
+| 7         | Y          | X/Y     | (X/Y)/7    |
+
+See the full [Speedup Measurement Guide](../Class16/06_speedup_measurement.md) for detailed instructions.
+
+---
+
 ## Further Reading
 
 - [Spark Configuration Guide](https://spark.apache.org/docs/latest/configuration.html)
 - [Tuning Spark](https://spark.apache.org/docs/latest/tuning.html)
 - [SDSC Expanse User Guide](https://www.sdsc.edu/support/user_guides/expanse.html)
+- [Speedup Measurement Guide](../Class16/06_speedup_measurement.md)
+- [Communication Costs Guide](../Class16/07_communication_costs.md)
+- [Spark UI Debugging Lab](../Class16/08_spark_ui_debugging.md)
+- [Spark vs Ray Comparison](../Class16/09_framework_comparison.md)
 
 ---
 
