@@ -2,12 +2,12 @@
 
 1. **How to create a Shared folder in SDSC server?**
 
-    You would need to create a `shared` folder inside of `uci150/$USER` and then run: 
+    You would need to create a `shared` folder inside of `uci157/$USER` and then run: 
     ```shell
     chmod g+w shared
     ```
     
-    This is only for the `shared` folder inside `uci150/$USER`. Creating a folder inside of `home` directory is extremely slow and has a small quota comparatively. However, `uci150` is fast and on the distributed file system. 
+    This is only for the `shared` folder inside `uci157/$USER`. Creating a folder inside of `home` directory is extremely slow and has a small quota comparatively. However, `uci157` is fast and on the distributed file system. 
 
     <br>
     <br>
