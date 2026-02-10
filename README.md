@@ -48,16 +48,16 @@ We will be working with the following apps:
 Click on the "expanse Shell Access" app in the SDSC Expanse Portal. Once you are in the Terminal, please run the following commands: 
 ```shell
 # Create a new folder with your username and add symbolic link
-ln -sf /expanse/lustre/projects/uci150/$USER
+ln -sf /expanse/lustre/projects/uci157/$USER
 
 # Add symbolic link to `esolares` folder where the singularity
 # images are stored
-ln -sf /expanse/lustre/projects/uci150/esolares
+ln -sf /expanse/lustre/projects/uci157/esolares
 
 # (Optional)
 # To see your group members folders, do the following for each 
 # group member's usernames
-ln -sf /expanse/lustre/projects/uci150/GROUPMEMBERUSERNAME
+ln -sf /expanse/lustre/projects/uci157/GROUPMEMBERUSERNAME
 ```
 >Note that you need to run the above instructions only once when accessing the Portal for the first time. 
 
@@ -74,7 +74,7 @@ It will allow you to request a new Jupyter Session as shown below:
 ![Jupyter Session](images/jupyter-config.png "Jupyter Session")
 
 You will need to fill out the following fields: 
-- **Account**: `TG-CIS240277`
+- **Account**: `TG-SEE260003`
 
 - **Partition**: `shared`
 
