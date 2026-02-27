@@ -86,7 +86,7 @@ You will need to fill out the following fields:
 
   > For example, if you have 128GB of total memory and 8 cores, each core gets 128/8 = 16GB of memory.
 
-- **Singularity Image File Location**: `~/esolares/spark_py_latest_jupyter_dsc232r.sif`
+- **Singularity Image File Location**: `~/esolares/singularity_images/spark_py_latest_jupyter_dsc232r.sif`
 
 - **Environment Modules to be loaded**: `singularitypro`
 
