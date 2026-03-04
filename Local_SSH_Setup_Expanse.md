@@ -1,6 +1,6 @@
 # Setting Up Local SSH & TOTP Access for SDSC Expanse
 
-This setup is optional but to connect to the SDSC Expanse cluster directly from your local terminal, you need to use SSH keys combined with a Time-Based One-Time Password (TOTP). Password-only SSH access is not supported.
+This setup is optional but to connect to the SDSC Expanse cluster directly from your **local terminal**, you need to use SSH keys combined with a Time-Based One-Time Password (TOTP). Password-only SSH access is not supported.
 
 Follow these steps carefully to configure your local machine.
 
@@ -14,7 +14,7 @@ Your SSH username is **not** your standard university email address.
 3. Type `whoami` and press Enter to see your exact SDSC username. Save this for Step 5.
 
 ## Step 2: Get Your Local Public SSH Key
-1. Open your local computer's terminal (Terminal on Mac/Linux, PowerShell or WSL on Windows).
+1. Open your **local computer's** terminal (Terminal on Mac/Linux, PowerShell or WSL on Windows).
 2. Check if you already have a key by running:
    ```bash
    cat ~/.ssh/id_rsa.pub
@@ -22,7 +22,7 @@ Your SSH username is **not** your standard university email address.
    cat ~/.ssh/id_ed25519.pub
    ```
 3. Copy the entire output string (it usually starts with `ssh-rsa` or `ssh-ed25519`). 
-*(Note: If you get an error saying the file doesn't exist, you need to generate a key first by running `ssh-keygen` and pressing Enter through all the default prompts).*
+*(Note: If you get an error saying the file doesn't exist, you need to generate a key first. We recommend minimums like RSA 4096 (`ssh-keygen -t rsa -b 4096`) or SHA256 / Ed25519 (`ssh-keygen -t ed25519`). Press Enter through all the default prompts).*
 
 ## Step 3: Add Your Key to Expanse
 You must append your local public key to your authorized keys file on the Expanse cluster.
@@ -31,7 +31,6 @@ You must append your local public key to your authorized keys file on the Expans
 2. Open your authorized keys file by running:
    ```bash
    mkdir -p ~/.ssh
-   touch ~/.ssh/authorized_keys
    nano ~/.ssh/authorized_keys #OR vim ~/.ssh/authorized_keys
    ```
 3. Paste the public key string you copied in Step 2 onto a new line in this file. 
@@ -51,7 +50,7 @@ Expanse requires a secondary authenticator app for external terminal access.
 ## Step 5: Connect via SSH
 Once the sync is complete, you are ready to log in from your local machine!
 
-1. Open your local computer's terminal.
+1. Open your **local computer's** terminal.
 2. Run the SSH command using the hostname `login.expanse.sdsc.edu` and your specific username:
    ```bash
    ssh <your_sdsc_username>@login.expanse.sdsc.edu
