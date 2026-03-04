@@ -61,6 +61,8 @@ ln -sf /expanse/lustre/projects/uci157/GROUPMEMBERUSERNAME
 ```
 >Note that you need to run the above instructions only once when accessing the Portal for the first time. 
 
+**Local SSH Access:** If you prefer to connect directly from your **local computer's** terminal instead of using the web portal, please see the **[Local SSH Setup Guide](Local_SSH_Setup_Expanse.md)**.
+
 <br>
 <br>
 
