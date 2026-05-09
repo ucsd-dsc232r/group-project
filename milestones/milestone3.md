@@ -10,7 +10,7 @@ In this milestone you will continue working on your main branch, focusing on com
 
 ## Instructions
 
-### 1. Complete Preprocessing using Spark (10 points)
+### 1. Complete Preprocessing using Spark (8 points)
 
 Finish major preprocessing using **Spark DataFrame operations** or **Spark MLlib transformers**:
 
@@ -21,7 +21,7 @@ Finish major preprocessing using **Spark DataFrame operations** or **Spark MLlib
 
 Your preprocessing pipeline should be reproducible and documented in your notebook.
 
-### 2. Train Your First Distributed Model (10 points)
+### 2. Train Your First Distributed Model (8 points)
 
 Train your first model using one of the following **distributed implementations**:
 
@@ -39,7 +39,7 @@ Train your first model using one of the following **distributed implementations*
 - Evaluate your model: compare **training vs. test error**
 - For supervised learning: include example ground truth and predictions for train, validation, and test sets
 
-### 3. Fitting Analysis (5 points)
+### 3. Fitting Analysis (4 points)
 
 Answer the following questions:
 
@@ -56,7 +56,27 @@ Write a conclusion for your first model:
 - What can be done to possibly improve it?
 - How did distributed computing help with this task?
 
-### 5. Update README.md
+### 5. Speedup Analysis (5 points) — NEW
+
+Measure and report the speedup achieved by your distributed implementation:
+
+1. **Baseline Measurement:** Run a representative operation (e.g., your preprocessing pipeline or model training) with 1 executor. Record wall-clock time.
+2. **Scaled Measurement:** Run the same operation with your full executor configuration. Record wall-clock time.
+3. **Calculate Metrics:**
+   - Speedup = T₁ / Tₙ (where n = number of executors)
+   - Efficiency = Speedup / n
+4. **Analyze:** Compare your measured speedup to the theoretical maximum (Amdahl's Law). Estimate what fraction of your code is parallelizable.
+
+**Include a table in your README.md:**
+
+| Executors | Time (sec) | Speedup | Efficiency |
+|---|---|---|---|
+| 1 | X | 1.00x | 100% |
+| 7 | Y | X/Y | (X/Y)/7 |
+
+See the [Speedup Measurement Guide](https://github.com/ucsd-dsc232r/group-project/blob/main/Class16/06_speedup_measurement.md) for detailed instructions.
+
+### 6. Update README.md
 
 Update your README.md to include your new work. Make sure to upload all code and notebooks. Provide links in your README.md.
 
