@@ -1,5 +1,12 @@
 # Group Project Information
 
+## Group Project Milestones
+ 
+- [Milestone 1: Project Abstract & Data Description](./milestones/milestone1.md) — Submit a one-paragraph abstract describing your dataset (10+ GB minimum) and why it requires distributed processing.
+- [Milestone 2: GitHub Setup, SDSC Expanse, & Data Exploration](./milestones/milestone2.md) — Set up your repo and Expanse environment, then explore your dataset using Spark DataFrames.
+- [Milestone 3: Preprocessing & First Distributed Model](./milestones/milestone3.md) — Complete preprocessing with Spark MLlib and train your first distributed model on Expanse.
+- [Milestone 4: Second Model, Final Report & Submission](./milestones/milestone4.md) — Build a second model using dimensionality reduction (PCA/SVD) and submit your final professional README.
+
 ## Login to SDSC Expanse
 Go to [portal.expanse.sdsc.edu](https://portal.expanse.sdsc.edu/) and login with your "ucsd.edu" credentials, unless instructed otherwise, in which case, you may use your "access-ci.org" credentials (if you have one).
 
