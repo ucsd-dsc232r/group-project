@@ -580,7 +580,7 @@ Include a speedup analysis table:
 | 1         | X          | 1.00x   | 100%       |
 | 7         | Y          | X/Y     | (X/Y)/7    |
 
-See the full [Speedup Measurement Guide](../Class16/06_speedup_measurement.md) for detailed instructions.
+See the full [Speedup Measurement Guide](https://github.com/ucsd-dsc232r/HPC-Lectures/blob/main/03_speedup_measurement.md) for detailed instructions.
 
 ---
 
@@ -589,10 +589,10 @@ See the full [Speedup Measurement Guide](../Class16/06_speedup_measurement.md) f
 - [Spark Configuration Guide](https://spark.apache.org/docs/latest/configuration.html)
 - [Tuning Spark](https://spark.apache.org/docs/latest/tuning.html)
 - [SDSC Expanse User Guide](https://www.sdsc.edu/support/user_guides/expanse.html)
-- [Speedup Measurement Guide](../Class16/06_speedup_measurement.md)
-- [Communication Costs Guide](../Class16/07_communication_costs.md)
-- [Spark UI Debugging Lab](../Class16/08_spark_ui_debugging.md)
-- [Spark vs Ray Comparison](../Class16/09_framework_comparison.md)
+- [Speedup Measurement Guide](https://github.com/ucsd-dsc232r/HPC-Lectures/blob/main/03_speedup_measurement.md)
+- [Communication Costs Guide](https://github.com/ucsd-dsc232r/HPC-Lectures/blob/main/04_communication_costs.md)
+- [Spark UI Debugging Lab](https://github.com/ucsd-dsc232r/HPC-Lectures/blob/main/05_spark_ui_debugging.md)
+- [Spark vs Ray Comparison](https://github.com/ucsd-dsc232r/HPC-Lectures/blob/main/06_framework_comparison.md)
 
 ---
 
